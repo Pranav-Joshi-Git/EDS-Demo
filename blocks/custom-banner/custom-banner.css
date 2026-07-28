@@ -1,0 +1,59 @@
+.custom-banner {
+	--custom-banner-bg: linear-gradient(135deg, #e8f3ff 0%, #d3e8ff 100%);
+	--custom-banner-border: #9ec5f8;
+	--custom-banner-title: #0d3b66;
+	--custom-banner-text: #1d3557;
+	border: 1px solid var(--custom-banner-border);
+	border-radius: 10px;
+	background: var(--custom-banner-bg);
+	overflow: hidden;
+}
+
+.custom-banner > div {
+	display: grid;
+	gap: 16px;
+	padding: 16px;
+}
+
+.custom-banner .custom-banner-media picture,
+.custom-banner .custom-banner-media img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+
+.custom-banner .custom-banner-content h1,
+.custom-banner .custom-banner-content h2,
+.custom-banner .custom-banner-content h3 {
+	margin: 0 0 12px;
+	color: var(--custom-banner-title);
+}
+
+.custom-banner .custom-banner-content p {
+	margin: 0;
+	color: var(--custom-banner-text);
+}
+
+.custom-banner.dark {
+	--custom-banner-bg: linear-gradient(135deg, #14213d 0%, #1f3a5f 100%);
+	--custom-banner-border: #3c5b86;
+	--custom-banner-title: #f4f8ff;
+	--custom-banner-text: #d8e5ff;
+	box-shadow: 0 8px 24px rgb(6 18 41 / 22%);
+}
+
+.custom-banner.dark .custom-banner-content a {
+	color: #9ed0ff;
+}
+
+.custom-banner.dark .custom-banner-content a:hover {
+	color: #c0e3ff;
+}
+
+@media (width >= 900px) {
+	.custom-banner > div {
+		grid-template-columns: 1fr 1fr;
+		align-items: center;
+	}
+}
