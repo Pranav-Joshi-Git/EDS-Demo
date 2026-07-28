@@ -18,6 +18,18 @@
   --text-color: #131313;
   --link-color: #3b63fb;
   --link-hover-color: #1d3ecf;
+  --light-grey-color : #d3d3d3;
+
+  /* block-party note tokens */
+  --color-info: #0b5cab;
+  --color-info-background: #eaf4ff;
+  --color-warning: #8a5a00;
+  --color-warning-background: #fff6dd;
+  --color-error: #b42318;
+  --color-error-background: #ffeceb;
+  --color-success: #027a48;
+  --color-success-background: #e9f9f0;
+  --font-size-body-m: var(--body-font-size-m);
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
@@ -322,4 +334,10 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+main .section.light-grey {
+  background-color: var(--light-grey-color);
+  margin: 20px;
+  padding: 20px;
 }

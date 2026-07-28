@@ -4,6 +4,68 @@ import { loadFragment } from '../fragment/fragment.js';
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
+function toLabel(value) {
+  return decodeURIComponent(value)
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function buildBreadcrumbs() {
+  if (getMetadata('breadcrumbs').toLowerCase() !== 'true') return null;
+
+  const title = getMetadata('title');
+  const parts = window.location.pathname
+    .replace(/\/$/, '')
+    .split('/')
+    .filter(Boolean);
+
+  // Avoid showing "index" as a breadcrumb segment.
+  if (parts[parts.length - 1] === 'index') {
+    parts.pop();
+  }
+
+  if (!parts.length) return null;
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'page-breadcrumbs';
+
+  const nav = document.createElement('nav');
+  nav.setAttribute('aria-label', 'Breadcrumb');
+
+  const list = document.createElement('ol');
+
+  const homeItem = document.createElement('li');
+  const homeLink = document.createElement('a');
+  homeLink.href = '/';
+  homeLink.textContent = 'Home';
+  homeItem.append(homeLink);
+  list.append(homeItem);
+
+  let path = '';
+  parts.forEach((segment, index) => {
+    path += `/${segment}`;
+    const item = document.createElement('li');
+    const isCurrent = index === parts.length - 1;
+
+    if (isCurrent) {
+      item.classList.add('is-current');
+      item.textContent = title || toLabel(segment);
+      item.setAttribute('aria-current', 'page');
+    } else {
+      const link = document.createElement('a');
+      link.href = `${path}/`;
+      link.textContent = toLabel(segment);
+      item.append(link);
+    }
+
+    list.append(item);
+  });
+
+  nav.append(list);
+  wrapper.append(nav);
+  return wrapper;
+}
+
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
@@ -168,4 +230,12 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  const breadcrumbs = buildBreadcrumbs();
+  if (breadcrumbs) {
+    const main = document.querySelector('main');
+    if (main) {
+      main.prepend(breadcrumbs);
+    }
+  }
 }

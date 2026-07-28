@@ -1,0 +1,97 @@
+.teaser {
+	border: 1px solid #d8dde6;
+	border-radius: 14px;
+	background: #fff;
+	overflow: hidden;
+	box-shadow: 0 8px 24px rgb(18 33 58 / 8%);
+}
+
+.teaser > div {
+	display: grid;
+	gap: 0;
+}
+
+.teaser > div > div:first-child {
+	background: linear-gradient(135deg, #f4f8ff 0%, #e8f1ff 100%);
+	display: grid;
+	place-items: center;
+	padding: 28px 24px;
+	border-bottom: 1px solid #d8dde6;
+}
+
+.teaser picture,
+.teaser img {
+	display: block;
+}
+
+.teaser img {
+	width: min(220px, 62vw);
+	height: auto;
+	object-fit: contain;
+}
+
+.teaser > div > div:last-child {
+	padding: 24px;
+}
+
+.teaser h2 {
+	margin: 0 0 14px;
+	color: #1e3558;
+	font-size: clamp(1.6rem, 4.2vw, 2.2rem);
+	line-height: 1.2;
+}
+
+.teaser p {
+	margin: 0;
+	color: #223449;
+}
+
+.teaser p + p {
+	margin-top: 12px;
+}
+
+.teaser .button-wrapper {
+	margin-top: 18px;
+}
+
+.teaser .button.primary {
+	border-color: #1457a8;
+	background: linear-gradient(135deg, #1f6dd1 0%, #1457a8 100%);
+	color: #fff;
+	border-radius: 999px;
+	padding: 0.62em 1.35em;
+	font-weight: 600;
+	box-shadow: 0 6px 16px rgb(20 87 168 / 30%);
+	transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.teaser .button.primary:hover,
+.teaser .button.primary:focus-visible {
+	border-color: #0f4a92;
+	background: linear-gradient(135deg, #145fb9 0%, #0f4a92 100%);
+	color: #fff;
+	transform: translateY(-1px);
+	box-shadow: 0 8px 18px rgb(15 74 146 / 36%);
+	text-decoration: none;
+}
+
+.teaser .button.primary:focus-visible {
+	outline: 2px solid #8ab8f5;
+	outline-offset: 2px;
+}
+
+@media (width >= 900px) {
+	.teaser > div {
+		grid-template-columns: minmax(240px, 38%) 1fr;
+	}
+
+	.teaser > div > div:first-child {
+		border-bottom: 0;
+		border-right: 1px solid #d8dde6;
+		padding: 36px;
+	}
+
+	.teaser > div > div:last-child {
+		padding: 32px;
+	}
+}
