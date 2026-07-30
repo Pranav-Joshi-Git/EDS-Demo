@@ -16,39 +16,133 @@
   <meta property="og:title" content="Page not found">
   <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
   <script nonce="aem" type="module">
-    window.addEventListener('load', () => {
-      if (document.referrer) {
-        const { origin, pathname } = new URL(document.referrer);
-        if (origin === window.location.origin) {
-          const backBtn = document.createElement('a');
-          backBtn.classList.add('button', 'error-button-back');
-          backBtn.href = pathname;
-          backBtn.textContent = 'Go back';
-          backBtn.title = 'Go back';
-          const btnContainer = document.querySelector('.button-container');
-          btnContainer.append(backBtn);
-        }
-      }
-    });
-  </script>
-  <script nonce="aem" type="module">
     import { sampleRUM } from '/scripts/aem.js';
     sampleRUM('404', { source: document.referrer });
   </script>
   <link rel="stylesheet" href="/styles/styles.css">
   <style>
     main.error {
-      min-height: calc(100vh - var(--nav-height));
+      min-height: calc(100vh - var(--nav-height) - 200px);
       display: flex;
       align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    main.error .section {
+      text-align: center;
+      max-width: 600px;
+      background: white;
+      padding: 3rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    main.error .error-icon {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.5rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { 
+        transform: scale(1);
+      }
+      50% { 
+        transform: scale(1.1);
+      }
+    }
+
+    main.error .error-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    main.error .error-icon path {
+      fill: #dc3545;
     }
 
     main.error .error-number {
       width: 100%;
+      max-width: 300px;
+      margin: 0 auto 2rem;
+      animation: float 3s ease-in-out infinite;
+      display: none;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
     }
 
     main.error .error-number text {
-      font-family: monospace;
+      font-family: 'Arial Black', sans-serif;
+      font-size: 8rem;
+      font-weight: 900;
+      fill: #667eea;
+    }
+
+    main.error .error-message {
+      font-size: 2rem;
+      color: #333;
+      margin: 1.5rem 0;
+      font-weight: 700;
+    }
+
+    main.error .error-description {
+      color: #666;
+      font-size: 1.125rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    main.error .button-container {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    main.error .button {
+      padding: 0.875rem 2rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    main.error .error-button-home {
+      background: #667eea;
+      color: white;
+      border: 2px solid #667eea;
+    }
+
+    main.error .error-button-home:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    @media (max-width: 599px) {
+      main.error .error-icon {
+        width: 80px;
+        height: 80px;
+      }
+
+      main.error .error-number text {
+        font-size: 5rem;
+      }
+
+      main.error .error-message {
+        font-size: 1.5rem;
+      }
+
+      main.error .section {
+        padding: 2rem 1.5rem;
+      }
     }
   </style>
   <link rel="stylesheet" href="/styles/lazy-styles.css">
@@ -58,12 +152,21 @@
   <header></header>
   <main class="error">
     <div class="section">
+      <div class="error-icon">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M0 11.25L4.75 16H11.25L16 11.25V4.75L11.25 0H4.75L0 4.75V11.25ZM7 3V9H9V3H7ZM7 11V13H9V11H7Z"/>
+        </svg>
+      </div>
       <svg viewBox="1 0 38 18" class="error-number">
         <text x="0" y="17">404</text>
       </svg>
-      <h2 class="error-message">Page Not Found</h2>
+      <h2 class="error-message">Oops! Page Not Found</h2>
+      <p class="error-description">
+        The page you're looking for doesn't exist or has been moved. 
+        Let's get you back on track.
+      </p>
       <p class="button-container">
-        <a href="/" class="button secondary error-button-home">Go home</a>
+        <a href="/" class="button error-button-home">Go Home</a>
       </p>
     </div>
   </main>

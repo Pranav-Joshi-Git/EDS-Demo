@@ -1,6 +1,6 @@
 main .note {
     --note-color: var(--color-info);
-
+    margin-top: 1rem;
     padding: 1.6rem 2.2rem;
     border-radius: 0.5rem;
     display: flex;
